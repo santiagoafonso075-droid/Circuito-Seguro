@@ -1,0 +1,38 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   CIRCUITO SEGURO — style.css
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+*, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+html, body {
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none; /* evita scroll/zoom no canvas no telemóvel */
+}
+
+/* ─── CANVAS ─────────────────────────────────────────────────────────────── */
+#gameCanvas {
+    display: block;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    aspect-ratio: 800 / 600;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    cursor: default;
+    /* Telemóvel: sem highlight no toque */
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
