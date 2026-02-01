@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "texto": "O que é o phishing?",
+    "respostas": {
+      "A": "Um tipo de rede social",
+      "B": "Um vírus que ataca o sistema operativo",
+      "C": "Uma tentativa de enganar o utilizador para obter informações pessoais"
+    },
+    "correta": "C",
+    "grid": [
+      "........",
+      "..#..A..",
+      "........",
+      "....#...",
+      "..#.B...",
+      ".C......"
+    ]
+  },
+  {
+    "id": 2,
+    "texto": "Qual a senha mais segura?",
+    "respostas": {
+      "A": "Maria2023",
+      "B": "password",
+      "C": "*Q$7fB!pL"
+    },
+    "correta": "C",
+    "grid": [
+      ".....#C.",
+      "........",
+      "..A.....",
+      "........",
+      "...#....",
+      "....#..B"
+    ]
+  },
+  {
+    "id": 3,
+    "texto": "O que deves fazer se receberes um e-mail suspeito a pedir a tua password?",
+    "respostas": {
+      "A": "Responder rapidamente para não perder a conta",
+      "B": "Ignorar e apagar o e-mail",
+      "C": "Clicar no link para verificar"
+    },
+    "correta": "B",
+    "grid": [
+      "...B....",
+      ".#......",
+      "....C...",
+      "........",
+      "..#.....",
+      "A......."
+    ]
+  },
+  {
+    "id": 4,
+    "texto": "Qual é a melhor forma de proteger uma conta online?",
+    "respostas": {
+      "A": "Usar a mesma password em todos os sites",
+      "B": "Ativar autenticação de dois fatores",
+      "C": "Partilhar a password com amigos de confiança"
+    },
+    "correta": "B",
+    "grid": [
+      "......C.",
+      "...#....",
+      "........",
+      "..A..#..",
+      "........",
+      "....#..B"
+    ]
+  },
+  {
+    "id": 5,
+    "texto": "O que é um vírus informático?",
+    "respostas": {
+      "A": "Um programa que melhora o desempenho do computador",
+      "B": "Um tipo de ficheiro de imagem",
+      "C": "Um software malicioso que pode danificar o sistema"
+    },
+    "correta": "C",
+    "grid": [
+      "........",
+      "....#...",
+      ".....C..",
+      "...#....",
+      "........",
+      "A#.B...."
+    ]
+  },
+  {
+    "id": 6,
+    "texto": "Qual destas ações é mais segura numa rede Wi-Fi pública?",
+    "respostas": {
+      "A": "Aceder ao banco online",
+      "B": "Fazer downloads de sites desconhecidos",
+      "C": "Evitar inserir dados pessoais"
+    },
+    "correta": "C",
+    "grid": [
+      "........",
+      "........",
+      "..B.....",
+      "........",
+      "....#...",
+      "A..#C..."
+    ]
+  },
+  {
+    "id": 7,
+    "texto": "O que significa HTTPS num site?",
+    "respostas": {
+      "A": "O site é mais rápido",
+      "B": "O site é mais seguro",
+      "C": "O site é gratuito"
+    },
+    "correta": "B",
+    "grid": [
+      "........",
+      ".C...#..",
+      "........",
+      ".#..A...",
+      "........",
+      "....#..B"
+    ]
+  },
+  {
+    "id": 8,
+    "texto": "O que deves fazer antes de instalar uma aplicação?",
+    "respostas": {
+      "A": "Verificar a origem e as permissões",
+      "B": "Aceitar todas as permissões sem ler",
+      "C": "Instalar o mais rápido possível"
+    },
+    "correta": "A",
+    "grid": [
+      "..B.....",
+      "........",
+      "....#...",
+      ".....C..",
+      "........",
+      "A......."
+    ]
+  },
+  {
+    "id": 9,
+    "texto": "Porque não deves partilhar informações pessoais nas redes sociais?",
+    "respostas": {
+      "A": "Porque ocupam espaço no perfil",
+      "B": "Porque podem ser usadas para roubo de identidade",
+      "C": "Porque deixam o telemóvel mais lento"
+    },
+    "correta": "B",
+    "grid": [
+      "........",
+      "..#.....",
+      "........",
+      "..B.....",
+      ".##.....",
+      "A....C.."
+    ]
+  },
+  {
+    "id": 10,
+    "texto": "O que é o cyberbullying?",
+    "respostas": {
+      "A": "Uma forma de assédio através da internet",
+      "B": "Um jogo online competitivo",
+      "C": "Um erro do sistema operativo"
+    },
+    "correta": "A",
+    "grid": [
+      "........",
+      "....#B..",
+      "........",
+      "A.......",
+      "....#...",
+      "....C#.."
+    ]
+  }
+]
