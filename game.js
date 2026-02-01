@@ -772,27 +772,35 @@ function handleClick(x, y) {
             inserir_active_field = "nome";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputNome");
-                // Forçar limpeza e resincronização
+                console.log("Clicou campo nome. player_nome atual:", player_nome);
+                // Técnica mais robusta: limpar, esperar render, depois sincronizar
                 inp.blur();
                 inp.value = "";
-                setTimeout(() => {
-                    inp.value = player_nome;
-                    inp.setSelectionRange(player_nome.length, player_nome.length);
-                    inp.focus();
-                }, 50);
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        inp.value = player_nome;
+                        console.log("Input nome sincronizado com:", player_nome);
+                        inp.setSelectionRange(player_nome.length, player_nome.length);
+                        inp.focus();
+                    });
+                });
             }
         } else if (hitTest(ID_CAMPO_TURMA)) {
             inserir_active_field = "turma";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputTurma");
-                // Forçar limpeza e resincronização
+                console.log("Clicou campo turma. player_turma atual:", player_turma);
+                // Técnica mais robusta: limpar, esperar render, depois sincronizar
                 inp.blur();
                 inp.value = "";
-                setTimeout(() => {
-                    inp.value = player_turma;
-                    inp.setSelectionRange(player_turma.length, player_turma.length);
-                    inp.focus();
-                }, 50);
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        inp.value = player_turma;
+                        console.log("Input turma sincronizado com:", player_turma);
+                        inp.setSelectionRange(player_turma.length, player_turma.length);
+                        inp.focus();
+                    });
+                });
             }
         } else if (hitTest(ID_BTN_COMECAR)) {
             if (player_nome.trim() !== "" && player_turma.trim() !== "") {
@@ -969,8 +977,26 @@ function init() {
         inputNome.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "nome") {
                 const oldValue = player_nome;
-                player_nome = e.target.value.slice(0, 25);
+                const inputValue = e.target.value;
+                player_nome = inputValue.slice(0, 25);
+                
+                // Forçar correção se o input tiver mais caracteres que o permitido
+                if (inputValue !== player_nome) {
+                    e.target.value = player_nome;
+                }
+                
                 console.log("Nome input:", oldValue, "->", player_nome, "| input.value:", e.target.value);
+            }
+        });
+        
+        // Prevenir que o browser autocomplete/restaure valores antigos
+        inputNome.addEventListener("focus", (e) => {
+            if (state === "inserir_dados" && inserir_active_field === "nome") {
+                // Verificar se o valor do input difere da variável
+                if (e.target.value !== player_nome) {
+                    console.log("CORRIGINDO input focus - era:", e.target.value, "deve ser:", player_nome);
+                    e.target.value = player_nome;
+                }
             }
         });
     }
@@ -979,8 +1005,26 @@ function init() {
         inputTurma.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "turma") {
                 const oldValue = player_turma;
-                player_turma = e.target.value.slice(0, 15);
+                const inputValue = e.target.value;
+                player_turma = inputValue.slice(0, 15);
+                
+                // Forçar correção se o input tiver mais caracteres que o permitido
+                if (inputValue !== player_turma) {
+                    e.target.value = player_turma;
+                }
+                
                 console.log("Turma input:", oldValue, "->", player_turma, "| input.value:", e.target.value);
+            }
+        });
+        
+        // Prevenir que o browser autocomplete/restaure valores antigos
+        inputTurma.addEventListener("focus", (e) => {
+            if (state === "inserir_dados" && inserir_active_field === "turma") {
+                // Verificar se o valor do input difere da variável
+                if (e.target.value !== player_turma) {
+                    console.log("CORRIGINDO input focus - era:", e.target.value, "deve ser:", player_turma);
+                    e.target.value = player_turma;
+                }
             }
         });
     }
