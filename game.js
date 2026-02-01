@@ -63,8 +63,8 @@ function calcDpad() {
     const gap = 6;
     const margin = 8;
     const bx = margin;
-    // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 410
-    const by = 410;
+    // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 450
+    const by = 450;
 
     dpadButtons = {
         up:     { x: bx + btnSz + gap, y: by,                          w: btnSz, h: btnSz },
@@ -195,7 +195,7 @@ async function loadAllAssets() {
     // Carregar música separadamente e garantir que está pronta
     const bgMusic = new Audio("assets/bg_music.mp3");
     bgMusic.loop = true;
-    bgMusic.volume = 0.08;
+    bgMusic.volume = 0.70;
     bgMusic.preload = "auto";
     
     // Esperar carregar
@@ -213,7 +213,7 @@ async function loadAllAssets() {
         bgMusic.load();
     });
     
-    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.1;
+    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.50;
 
     prescaleTitles();
     await loadQuestions();
@@ -772,15 +772,21 @@ function handleClick(x, y) {
             inserir_active_field = "nome";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputNome");
-                inp.value = player_nome; // Sincronizar valor atual
-                inp.focus();
+                inp.value = ""; // LIMPAR COMPLETAMENTE PRIMEIRO
+                setTimeout(() => {
+                    inp.value = player_nome; // DEFINIR o valor correto
+                    inp.focus();
+                }, 10);
             }
         } else if (hitTest(ID_CAMPO_TURMA)) {
             inserir_active_field = "turma";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputTurma");
-                inp.value = player_turma; // Sincronizar valor atual
-                inp.focus();
+                inp.value = ""; // LIMPAR COMPLETAMENTE PRIMEIRO
+                setTimeout(() => {
+                    inp.value = player_turma; // DEFINIR o valor correto
+                    inp.focus();
+                }, 10);
             }
         } else if (hitTest(ID_BTN_COMECAR)) {
             if (player_nome.trim() !== "" && player_turma.trim() !== "") {
@@ -954,45 +960,28 @@ function init() {
     const inputTurma = document.getElementById("hiddenInputTurma");
     
     if (inputNome) {
-        // Usar addEventListener com opção para remover listener antigo
-        inputNome.oninput = null; // limpar qualquer listener antigo
         inputNome.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "nome") {
-                // Atualizar variável do jogo diretamente do input
-                const newValue = e.target.value.slice(0, 25);
-                player_nome = newValue;
-                // Garantir que o input reflete exatamente o que está na variável
-                if (e.target.value !== newValue) {
-                    e.target.value = newValue;
-                }
+                player_nome = e.target.value.slice(0, 25);
+            } else {
+                e.target.value = ""; // Limpar se não estiver ativo
             }
         });
-        // Prevenir que o input tenha valor quando não está ativo
-        inputNome.addEventListener("focus", (e) => {
-            if (state === "inserir_dados" && inserir_active_field === "nome") {
-                e.target.value = player_nome;
-            }
+        inputNome.addEventListener("blur", () => {
+            inputNome.value = ""; // Limpar ao perder foco
         });
     }
     
     if (inputTurma) {
-        inputTurma.oninput = null; // limpar qualquer listener antigo
         inputTurma.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "turma") {
-                // Atualizar variável do jogo diretamente do input
-                const newValue = e.target.value.slice(0, 15);
-                player_turma = newValue;
-                // Garantir que o input reflete exatamente o que está na variável
-                if (e.target.value !== newValue) {
-                    e.target.value = newValue;
-                }
+                player_turma = e.target.value.slice(0, 15);
+            } else {
+                e.target.value = ""; // Limpar se não estiver ativo
             }
         });
-        // Prevenir que o input tenha valor quando não está ativo
-        inputTurma.addEventListener("focus", (e) => {
-            if (state === "inserir_dados" && inserir_active_field === "turma") {
-                e.target.value = player_turma;
-            }
+        inputTurma.addEventListener("blur", () => {
+            inputTurma.value = ""; // Limpar ao perder foco
         });
     }
 
