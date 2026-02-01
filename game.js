@@ -133,7 +133,19 @@ function tryPlayMusic() {
 function unlockAudio() {
     if (audioUnlocked) return;
     audioUnlocked = true;
-    tryPlayMusic();
+    
+    // Forçar música a tocar imediatamente
+    const m = sounds["bg_music"];
+    if (m) {
+        m.play().then(() => {
+            console.log("Música iniciada com sucesso");
+        }).catch((err) => {
+            console.log("Erro ao iniciar música:", err);
+            // Tentar novamente após pequeno delay
+            setTimeout(() => m.play().catch(() => {}), 100);
+        });
+    }
+    
     pendingSounds.forEach(n => playSound(n));
     pendingSounds = [];
     if (current_title_index === 2) playSound("shock.wav");
@@ -181,10 +193,10 @@ async function loadAllAssets() {
 
     if (sounds["bg_music.mp3"]) {
         sounds["bg_music.mp3"].loop = true;
-        sounds["bg_music.mp3"].volume = 0.40;
+        sounds["bg_music.mp3"].volume = 0.70;
         sounds["bg_music"] = sounds["bg_music.mp3"];
     }
-    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.20;
+    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.50;
 
     prescaleTitles();
     await loadQuestions();
@@ -728,8 +740,13 @@ function handleClick(x, y) {
         if (hitTest(menuButtons.jogar)) {
             stopSound("shock.wav");
             state = "inserir_dados"; inserir_active_field = "nome";
+            player_nome = ""; player_turma = ""; // Resetar campos
             // Ativar input no telemóvel
-            if (showDpad) setTimeout(() => document.getElementById("hiddenInputNome").focus(), 100);
+            if (showDpad) {
+                const inp = document.getElementById("hiddenInputNome");
+                inp.value = "";
+                setTimeout(() => inp.focus(), 100);
+            }
         } else if (hitTest(menuButtons.creditos)) {
             stopSound("shock.wav");
             state = "creditos";
@@ -739,10 +756,18 @@ function handleClick(x, y) {
     } else if (state === "inserir_dados") {
         if (hitTest(ID_CAMPO_NOME)) {
             inserir_active_field = "nome";
-            if (showDpad) document.getElementById("hiddenInputNome").focus();
+            if (showDpad) {
+                const inp = document.getElementById("hiddenInputNome");
+                inp.value = player_nome;
+                inp.focus();
+            }
         } else if (hitTest(ID_CAMPO_TURMA)) {
             inserir_active_field = "turma";
-            if (showDpad) document.getElementById("hiddenInputTurma").focus();
+            if (showDpad) {
+                const inp = document.getElementById("hiddenInputTurma");
+                inp.value = player_turma;
+                inp.focus();
+            }
         } else if (hitTest(ID_BTN_COMECAR)) {
             if (player_nome.trim() !== "" && player_turma.trim() !== "") {
                 startGameSession(); state = "jogo";
@@ -911,6 +936,11 @@ function init() {
         inputNome.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "nome") {
                 player_nome = e.target.value.slice(0, 25);
+            }
+        });
+        inputNome.addEventListener("keydown", (e) => {
+            if (state === "inserir_dados" && inserir_active_field === "nome" && e.key === "Backspace") {
+                player_nome = player_nome.slice(0, -1);
                 e.target.value = player_nome;
             }
         });
@@ -920,6 +950,11 @@ function init() {
         inputTurma.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "turma") {
                 player_turma = e.target.value.slice(0, 15);
+            }
+        });
+        inputTurma.addEventListener("keydown", (e) => {
+            if (state === "inserir_dados" && inserir_active_field === "turma" && e.key === "Backspace") {
+                player_turma = player_turma.slice(0, -1);
                 e.target.value = player_turma;
             }
         });
