@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>Circuito Seguro</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Canvas do jogo: 800×600 lógico, escala via CSS -->
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+
+<!-- Inputs invisíveis para ativar teclado no telemóvel -->
+<input type="text" id="hiddenInputNome" style="position:absolute; left:-9999px;" autocomplete="off" />
+<input type="text" id="hiddenInputTurma" style="position:absolute; left:-9999px;" autocomplete="off" />
+
+<script src="game.js"></script>
+</body>
+</html>
