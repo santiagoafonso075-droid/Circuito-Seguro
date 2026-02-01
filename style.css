@@ -27,12 +27,12 @@ html, body {
     width: auto;
     height: auto;
     aspect-ratio: 800 / 600;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
+    /* Remover pixelated para melhor qualidade de texto */
+    image-rendering: auto;
     cursor: default;
     /* Telemóvel: sem highlight no toque */
     -webkit-tap-highlight-color: transparent;
+    /* Melhorar antialiasing do canvas */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
-
-
-
