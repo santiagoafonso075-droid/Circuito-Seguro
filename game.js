@@ -64,7 +64,7 @@ function calcDpad() {
     const margin = 8;
     const bx = margin;
     // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 480 (bem mais abaixo)
-    const by = 480;
+    const by = 470;
 
     dpadButtons = {
         up:     { x: bx + btnSz + gap, y: by,                          w: btnSz, h: btnSz },
