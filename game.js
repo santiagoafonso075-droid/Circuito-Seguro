@@ -181,10 +181,10 @@ async function loadAllAssets() {
 
     if (sounds["bg_music.mp3"]) {
         sounds["bg_music.mp3"].loop = true;
-        sounds["bg_music.mp3"].volume = 0.15;
+        sounds["bg_music.mp3"].volume = 0.40;
         sounds["bg_music"] = sounds["bg_music.mp3"];
     }
-    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.1;
+    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.20;
 
     prescaleTitles();
     await loadQuestions();
