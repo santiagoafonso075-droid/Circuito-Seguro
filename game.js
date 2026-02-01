@@ -184,25 +184,38 @@ async function loadAllAssets() {
         "life_full.png","life_half.png","life_empty.png",
         "obstacle.png","socket_A.png","socket_B.png","socket_C.png"
     ];
-    const sndNames = ["shock.wav","correct.wav","wrong.wav","victory.wav","bg_music.mp3"];
+    const sndNames = ["shock.wav","correct.wav","wrong.wav","victory.wav"];
 
     await Promise.all([
         ...imgNames.map(n => loadImage(n)),
         ...sndNames.map(n => loadSound(n))
     ]);
 
-    if (sounds["bg_music.mp3"]) {
-        sounds["bg_music.mp3"].loop = true;
-        sounds["bg_music.mp3"].volume = 0.70;
-        sounds["bg_music"] = sounds["bg_music.mp3"];
-    }
-    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.50;
+    // Carregar música separadamente e garantir que está pronta
+    const bgMusic = new Audio("assets/bg_music.mp3");
+    bgMusic.loop = true;
+    bgMusic.volume = 0.08;
+    bgMusic.preload = "auto";
+    
+    // Esperar carregar
+    await new Promise((resolve) => {
+        bgMusic.addEventListener("canplaythrough", () => {
+            sounds["bg_music"] = bgMusic;
+            console.log("Música carregada");
+            resolve();
+        }, { once: true });
+        bgMusic.addEventListener("error", () => {
+            console.log("Erro ao carregar música");
+            sounds["bg_music"] = null;
+            resolve();
+        }, { once: true });
+        bgMusic.load();
+    });
+    
+    if (sounds["shock.wav"]) sounds["shock.wav"].volume = 0.1;
 
     prescaleTitles();
     await loadQuestions();
-
-    // Tentar tocar música logo (funciona se o browser permitir autoplay)
-    tryPlayMusic();
 
     requestAnimationFrame(gameLoop);
 }
@@ -938,24 +951,12 @@ function init() {
                 player_nome = e.target.value.slice(0, 25);
             }
         });
-        inputNome.addEventListener("keydown", (e) => {
-            if (state === "inserir_dados" && inserir_active_field === "nome" && e.key === "Backspace") {
-                player_nome = player_nome.slice(0, -1);
-                e.target.value = player_nome;
-            }
-        });
     }
     
     if (inputTurma) {
         inputTurma.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "turma") {
                 player_turma = e.target.value.slice(0, 15);
-            }
-        });
-        inputTurma.addEventListener("keydown", (e) => {
-            if (state === "inserir_dados" && inserir_active_field === "turma" && e.key === "Backspace") {
-                player_turma = player_turma.slice(0, -1);
-                e.target.value = player_turma;
             }
         });
     }
