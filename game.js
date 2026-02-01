@@ -64,7 +64,7 @@ function calcDpad() {
     const margin = 8;
     const bx = margin;
     // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 480 (bem mais abaixo)
-    const by = 470;
+    const by = 450;
 
     dpadButtons = {
         up:     { x: bx + btnSz + gap, y: by,                          w: btnSz, h: btnSz },
@@ -528,7 +528,7 @@ function drawInserirDados() {
 const CREDITS_LINES = [
     "Desenvolvimento: Santiago 11ºB","",
     "Design: Santiago 11ºB","",
-    "Música: Eleven Labs","",
+    "Música: Dark Heart by Walen","",
     "Perguntas: Afonso Pinto, João Esteves, Lucas Pinheiro","",
     "Prémios: Martim Gomes, Pedro Almeida, Diego Luís","",
     "Obrigado por jogar! :)"
