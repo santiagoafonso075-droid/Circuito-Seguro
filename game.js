@@ -59,12 +59,12 @@ let dpadPressed = { up: false, down: false, left: false, right: false, action: f
 
 function calcDpad() {
     // Tamanho do dpad relativo ao canvas lógico
-    const btnSz = 70;
-    const gap = 8;
-    const margin = 10;
+    const btnSz = 60;
+    const gap = 6;
+    const margin = 8;
     const bx = margin;
-    // Mover mais para baixo - começar 10px acima do fundo
-    const by = HEIGHT - 10 - btnSz * 3 - gap * 2;
+    // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 410
+    const by = 410;
 
     dpadButtons = {
         up:     { x: bx + btnSz + gap, y: by,                          w: btnSz, h: btnSz },
@@ -833,16 +833,15 @@ function onTouchStart(e) {
     for (let i = 0; i < e.touches.length; i++) {
         const t = e.touches[i];
         const p = screenToCanvas(t.clientX, t.clientY);
-        // Marcar dpad como premido
+        // Marcar dpad como premido (sem chamar moveRobot aqui)
         if (state === "jogo" && showDpad) {
             for (const [key, r] of Object.entries(dpadButtons)) {
                 if (p.x >= r.x && p.x <= r.x+r.w && p.y >= r.y && p.y <= r.y+r.h) {
                     dpadPressed[key] = true;
-                    moveRobot(key);
                 }
             }
         }
-        handleClick(p.x, p.y);
+        handleClick(p.x, p.y); // handleClick já chama moveRobot
     }
 }
 
@@ -955,17 +954,44 @@ function init() {
     const inputTurma = document.getElementById("hiddenInputTurma");
     
     if (inputNome) {
+        // Usar addEventListener com opção para remover listener antigo
+        inputNome.oninput = null; // limpar qualquer listener antigo
         inputNome.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "nome") {
-                player_nome = e.target.value.slice(0, 25);
+                // Atualizar variável do jogo diretamente do input
+                const newValue = e.target.value.slice(0, 25);
+                player_nome = newValue;
+                // Garantir que o input reflete exatamente o que está na variável
+                if (e.target.value !== newValue) {
+                    e.target.value = newValue;
+                }
+            }
+        });
+        // Prevenir que o input tenha valor quando não está ativo
+        inputNome.addEventListener("focus", (e) => {
+            if (state === "inserir_dados" && inserir_active_field === "nome") {
+                e.target.value = player_nome;
             }
         });
     }
     
     if (inputTurma) {
+        inputTurma.oninput = null; // limpar qualquer listener antigo
         inputTurma.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "turma") {
-                player_turma = e.target.value.slice(0, 15);
+                // Atualizar variável do jogo diretamente do input
+                const newValue = e.target.value.slice(0, 15);
+                player_turma = newValue;
+                // Garantir que o input reflete exatamente o que está na variável
+                if (e.target.value !== newValue) {
+                    e.target.value = newValue;
+                }
+            }
+        });
+        // Prevenir que o input tenha valor quando não está ativo
+        inputTurma.addEventListener("focus", (e) => {
+            if (state === "inserir_dados" && inserir_active_field === "turma") {
+                e.target.value = player_turma;
             }
         });
     }
