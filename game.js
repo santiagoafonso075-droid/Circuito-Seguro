@@ -63,8 +63,8 @@ function calcDpad() {
     const gap = 6;
     const margin = 8;
     const bx = margin;
-    // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 450
-    const by = 450;
+    // Grid termina em Y=95 + (6*48) = 383. Colocar d-pad em 480 (bem mais abaixo)
+    const by = 480;
 
     dpadButtons = {
         up:     { x: bx + btnSz + gap, y: by,                          w: btnSz, h: btnSz },
@@ -772,21 +772,27 @@ function handleClick(x, y) {
             inserir_active_field = "nome";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputNome");
-                inp.value = ""; // LIMPAR COMPLETAMENTE PRIMEIRO
+                // Forçar limpeza e resincronização
+                inp.blur();
+                inp.value = "";
                 setTimeout(() => {
-                    inp.value = player_nome; // DEFINIR o valor correto
+                    inp.value = player_nome;
+                    inp.setSelectionRange(player_nome.length, player_nome.length);
                     inp.focus();
-                }, 10);
+                }, 50);
             }
         } else if (hitTest(ID_CAMPO_TURMA)) {
             inserir_active_field = "turma";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputTurma");
-                inp.value = ""; // LIMPAR COMPLETAMENTE PRIMEIRO
+                // Forçar limpeza e resincronização
+                inp.blur();
+                inp.value = "";
                 setTimeout(() => {
-                    inp.value = player_turma; // DEFINIR o valor correto
+                    inp.value = player_turma;
+                    inp.setSelectionRange(player_turma.length, player_turma.length);
                     inp.focus();
-                }, 10);
+                }, 50);
             }
         } else if (hitTest(ID_BTN_COMECAR)) {
             if (player_nome.trim() !== "" && player_turma.trim() !== "") {
@@ -962,26 +968,20 @@ function init() {
     if (inputNome) {
         inputNome.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "nome") {
+                const oldValue = player_nome;
                 player_nome = e.target.value.slice(0, 25);
-            } else {
-                e.target.value = ""; // Limpar se não estiver ativo
+                console.log("Nome input:", oldValue, "->", player_nome, "| input.value:", e.target.value);
             }
-        });
-        inputNome.addEventListener("blur", () => {
-            inputNome.value = ""; // Limpar ao perder foco
         });
     }
     
     if (inputTurma) {
         inputTurma.addEventListener("input", (e) => {
             if (state === "inserir_dados" && inserir_active_field === "turma") {
+                const oldValue = player_turma;
                 player_turma = e.target.value.slice(0, 15);
-            } else {
-                e.target.value = ""; // Limpar se não estiver ativo
+                console.log("Turma input:", oldValue, "->", player_turma, "| input.value:", e.target.value);
             }
-        });
-        inputTurma.addEventListener("blur", () => {
-            inputTurma.value = ""; // Limpar ao perder foco
         });
     }
 
