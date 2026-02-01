@@ -61,9 +61,10 @@ function calcDpad() {
     // Tamanho do dpad relativo ao canvas lógico
     const btnSz = 70;
     const gap = 8;
-    const margin = 20;
+    const margin = 10;
     const bx = margin;
-    const by = HEIGHT - margin - btnSz * 3 - gap * 2;
+    // Mover mais para baixo - começar 10px acima do fundo
+    const by = HEIGHT - 10 - btnSz * 3 - gap * 2;
 
     dpadButtons = {
         up:     { x: bx + btnSz + gap, y: by,                          w: btnSz, h: btnSz },
@@ -771,26 +772,34 @@ function handleClick(x, y) {
             inserir_active_field = "nome";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputNome");
-                inp.value = player_nome;
+                inp.value = player_nome; // Sincronizar valor atual
                 inp.focus();
             }
         } else if (hitTest(ID_CAMPO_TURMA)) {
             inserir_active_field = "turma";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputTurma");
-                inp.value = player_turma;
+                inp.value = player_turma; // Sincronizar valor atual
                 inp.focus();
             }
         } else if (hitTest(ID_BTN_COMECAR)) {
             if (player_nome.trim() !== "" && player_turma.trim() !== "") {
                 startGameSession(); state = "jogo";
-                // Fechar teclado
-                if (showDpad) document.activeElement.blur();
+                // Fechar teclado e limpar inputs
+                if (showDpad) {
+                    document.activeElement.blur();
+                    document.getElementById("hiddenInputNome").value = "";
+                    document.getElementById("hiddenInputTurma").value = "";
+                }
             }
         } else if (hitTest(ID_BTN_VOLTAR)) {
             state = "menu";
-            // Fechar teclado
-            if (showDpad) document.activeElement.blur();
+            // Fechar teclado e limpar inputs
+            if (showDpad) {
+                document.activeElement.blur();
+                document.getElementById("hiddenInputNome").value = "";
+                document.getElementById("hiddenInputTurma").value = "";
+            }
         }
     } else if (state === "creditos") {
         const br = { x:WIDTH/2-110, y:HEIGHT-100, w:220, h:60 };
