@@ -748,37 +748,53 @@ function hitTest(rect) {
 function screenToCanvas(clientX, clientY) {
     const rect = canvas.getBoundingClientRect();
     
-    // Detectar se está rodado (portrait no telemóvel)
-    const isRotated = window.innerWidth < 768 && window.innerHeight > window.innerWidth;
+    // Obter rotação atual do canvas (do CSS transform)
+    const transform = window.getComputedStyle(canvas).transform;
+    let angle = 0;
     
-    if (isRotated) {
-        // Canvas está rodado 90° - precisamos ajustar as coordenadas
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        // Traduzir para origem no centro
-        let relX = clientX - centerX;
-        let relY = clientY - centerY;
-        
-        // Rodar -90° (inverter a rotação do CSS)
-        let rotX = relY;
-        let rotY = -relX;
-        
-        // Voltar para sistema de coordenadas normal
-        let canvasX = rotX + rect.width / 2;
-        let canvasY = rotY + rect.height / 2;
-        
-        return {
-            x: canvasX * (WIDTH / rect.width),
-            y: canvasY * (HEIGHT / rect.height)
-        };
-    } else {
-        // Normal (landscape ou desktop)
-        return {
-            x: (clientX - rect.left) * (WIDTH  / rect.width),
-            y: (clientY - rect.top)  * (HEIGHT / rect.height)
-        };
+    if (transform && transform !== 'none') {
+        const values = transform.split('(')[1].split(')')[0].split(',');
+        const a = parseFloat(values[0]);
+        const b = parseFloat(values[1]);
+        angle = Math.round(Math.atan2(b, a) * (180 / Math.PI));
     }
+    
+    // Calcular centro do canvas
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    // Coordenadas relativas ao centro
+    let relX = clientX - centerX;
+    let relY = clientY - centerY;
+    
+    // Aplicar rotação inversa
+    if (angle !== 0) {
+        const rad = -angle * Math.PI / 180;
+        const cos = Math.cos(rad);
+        const sin = Math.sin(rad);
+        const rotX = relX * cos - relY * sin;
+        const rotY = relX * sin + relY * cos;
+        relX = rotX;
+        relY = rotY;
+    }
+    
+    // Escalar para coordenadas lógicas
+    let scaleX, scaleY;
+    
+    if (Math.abs(angle) === 90 || Math.abs(angle) === 270) {
+        // Canvas rodado 90° - dimensões trocadas
+        scaleX = WIDTH / rect.height;
+        scaleY = HEIGHT / rect.width;
+    } else {
+        // Canvas normal ou rodado 180°
+        scaleX = WIDTH / rect.width;
+        scaleY = HEIGHT / rect.height;
+    }
+    
+    return {
+        x: (relX * scaleX) + WIDTH / 2,
+        y: (relY * scaleY) + HEIGHT / 2
+    };
 }
 
 function onMouseMove(e) {
@@ -1076,6 +1092,54 @@ function init() {
             }
         });
     }
+
+    // ─── ROTAÇÃO DINÂMICA DO CANVAS (giroscópio) ─────────────────────────────
+    // Acompanha a rotação física do telemóvel
+    let currentRotation = 0;
+    
+    function updateCanvasRotation() {
+        // Detectar orientação da tela
+        const orientation = window.screen?.orientation?.angle || 0;
+        
+        // Aplicar rotação baseada na orientação
+        // 0° = portrait normal
+        // 90° = landscape (esquerda)
+        // -90° ou 270° = landscape (direita)
+        // 180° = portrait invertido
+        
+        if (showDpad) { // Só no telemóvel
+            currentRotation = -orientation; // Inverter para compensar
+            canvas.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Ajustar tamanho do canvas baseado na orientação
+            if (Math.abs(orientation) === 90 || Math.abs(orientation) === 270) {
+                // Landscape - canvas normal
+                canvas.style.maxWidth = '100vw';
+                canvas.style.maxHeight = '100vh';
+                canvas.style.width = 'auto';
+                canvas.style.height = 'auto';
+            } else {
+                // Portrait - inverter dimensões
+                canvas.style.maxWidth = '100vh';
+                canvas.style.maxHeight = '100vw';
+                canvas.style.width = '100vh';
+                canvas.style.height = 'auto';
+            }
+        }
+    }
+    
+    // Atualizar quando a orientação mudar
+    if (window.screen?.orientation) {
+        window.screen.orientation.addEventListener('change', updateCanvasRotation);
+        updateCanvasRotation(); // Aplicar rotação inicial
+    }
+    
+    // Fallback para navegadores sem Screen Orientation API
+    window.addEventListener('orientationchange', () => {
+        setTimeout(updateCanvasRotation, 100);
+    });
+    
+    window.addEventListener('resize', updateCanvasRotation);
 
     loadAllAssets();
 }
