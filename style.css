@@ -36,3 +36,17 @@ html, body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+/* ─── ROTAÇÃO AUTOMÁTICA NO TELEMÓVEL (portrait) ───────────────────────── */
+/* Quando o telemóvel está vertical, roda o canvas 90° para aproveitar melhor o espaço */
+@media (orientation: portrait) and (max-width: 768px) {
+    #gameCanvas {
+        transform: rotate(90deg);
+        transform-origin: center center;
+        /* Ajustar tamanho: a altura vira largura e vice-versa */
+        max-width: 100vh;
+        max-height: 100vw;
+        width: 100vh;
+        height: auto;
+    }
+}
