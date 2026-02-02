@@ -35,7 +35,4 @@ html, body {
     /* Melhorar antialiasing do canvas */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    /* Transição suave para rotação */
-    transition: transform 0.3s ease;
-    transform-origin: center center;
 }
