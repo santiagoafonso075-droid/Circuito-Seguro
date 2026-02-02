@@ -135,16 +135,27 @@ function unlockAudio() {
     if (audioUnlocked) return;
     audioUnlocked = true;
     
-    // Forçar música a tocar imediatamente
+    // Forçar música a tocar imediatamente com volume máximo
     const m = sounds["bg_music"];
     if (m) {
-        m.play().then(() => {
-            console.log("Música iniciada com sucesso");
-        }).catch((err) => {
-            console.log("Erro ao iniciar música:", err);
-            // Tentar novamente após pequeno delay
-            setTimeout(() => m.play().catch(() => {}), 100);
-        });
+        m.volume = 1.0; // Garantir volume máximo
+        
+        // Tentar tocar imediatamente
+        const tryPlay = () => {
+            m.play().then(() => {
+                console.log("✅ Música iniciada com sucesso - Volume:", m.volume);
+            }).catch((err) => {
+                console.log("⚠️ Tentativa falhada, a tentar novamente...", err);
+                // Tentar novamente com intervalos crescentes
+                setTimeout(() => tryPlay(), 50);
+                setTimeout(() => tryPlay(), 150);
+                setTimeout(() => tryPlay(), 300);
+                setTimeout(() => tryPlay(), 500);
+                setTimeout(() => tryPlay(), 1000);
+            });
+        };
+        
+        tryPlay();
     }
     
     pendingSounds.forEach(n => playSound(n));
@@ -195,7 +206,7 @@ async function loadAllAssets() {
     // Carregar música separadamente e garantir que está pronta
     const bgMusic = new Audio("assets/bg_music.mp3");
     bgMusic.loop = true;
-    bgMusic.volume = 0.70;
+    bgMusic.volume = 1.0;  // Volume a 100%
     bgMusic.preload = "auto";
     
     // Esperar carregar
@@ -933,6 +944,15 @@ setInterval(() => {
 function gameLoop() {
     if (state === "creditos" && !credits_title_on && credits_title_switch_time && performance.now() >= credits_title_switch_time)
         credits_title_on = true;
+
+    // Garantir que a música está sempre a tocar (especialmente importante em telemóveis)
+    if (audioUnlocked) {
+        const m = sounds["bg_music"];
+        if (m && m.paused) {
+            console.log("🔄 Música pausada, a tentar reiniciar...");
+            m.play().catch(() => {});
+        }
+    }
 
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
     switch(state) {
