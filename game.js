@@ -747,10 +747,38 @@ function hitTest(rect) {
 // Converter coordenadas do ecrã → coordenadas lógicas do canvas (800×600)
 function screenToCanvas(clientX, clientY) {
     const rect = canvas.getBoundingClientRect();
-    return {
-        x: (clientX - rect.left) * (WIDTH  / rect.width),
-        y: (clientY - rect.top)  * (HEIGHT / rect.height)
-    };
+    
+    // Detectar se está rodado (portrait no telemóvel)
+    const isRotated = window.innerWidth < 768 && window.innerHeight > window.innerWidth;
+    
+    if (isRotated) {
+        // Canvas está rodado 90° - precisamos ajustar as coordenadas
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        // Traduzir para origem no centro
+        let relX = clientX - centerX;
+        let relY = clientY - centerY;
+        
+        // Rodar -90° (inverter a rotação do CSS)
+        let rotX = relY;
+        let rotY = -relX;
+        
+        // Voltar para sistema de coordenadas normal
+        let canvasX = rotX + rect.width / 2;
+        let canvasY = rotY + rect.height / 2;
+        
+        return {
+            x: canvasX * (WIDTH / rect.width),
+            y: canvasY * (HEIGHT / rect.height)
+        };
+    } else {
+        // Normal (landscape ou desktop)
+        return {
+            x: (clientX - rect.left) * (WIDTH  / rect.width),
+            y: (clientY - rect.top)  * (HEIGHT / rect.height)
+        };
+    }
 }
 
 function onMouseMove(e) {
