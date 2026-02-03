@@ -236,10 +236,10 @@ async function loadQuestions() {
     try {
         const resp = await fetch("assets/questions.json");
         const data = await resp.json();
-        if (Array.isArray(data) && data.length >= 10) { all_questions = data; return; }
+        if (Array.isArray(data) && data.length >= 25) { all_questions = data; return; }
     } catch(e) {}
     all_questions = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 25; i++) {
         const grid = [];
         for (let r = 0; r < GRID_ROWS; r++) grid.push(".".repeat(GRID_COLS));
         const row = Math.floor(Math.random() * GRID_ROWS);
@@ -301,7 +301,7 @@ async function saveResult(nome, turma, tempo_ms) {
 // ─── LÓGICA DO JOGO ──────────────────────────────────────────────────────────
 function startGameSession() {
     const indices = [];
-    while (indices.length < 10) {
+    while (indices.length < 15) {
         const r = Math.floor(Math.random() * all_questions.length);
         if (!indices.includes(r)) indices.push(r);
     }
