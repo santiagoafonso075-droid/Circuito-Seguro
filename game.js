@@ -765,11 +765,11 @@ function handleClick(x, y) {
             stopSound("shock.wav");
             state = "inserir_dados"; inserir_active_field = "nome";
             player_nome = ""; player_turma = ""; // Resetar campos
-            // Ativar input no telemóvel
+            // Ativar input no telemóvel (focus síncrono — iOS Safari exige isto)
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputNome");
                 inp.value = "";
-                setTimeout(() => inp.focus(), 100);
+                inp.focus();
             }
         } else if (hitTest(menuButtons.creditos)) {
             stopSound("shock.wav");
@@ -782,35 +782,17 @@ function handleClick(x, y) {
             inserir_active_field = "nome";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputNome");
-                console.log("Clicou campo nome. player_nome atual:", player_nome);
-                // Técnica mais robusta: limpar, esperar render, depois sincronizar
-                inp.blur();
-                inp.value = "";
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        inp.value = player_nome;
-                        console.log("Input nome sincronizado com:", player_nome);
-                        inp.setSelectionRange(player_nome.length, player_nome.length);
-                        inp.focus();
-                    });
-                });
+                inp.value = player_nome;
+                inp.setSelectionRange(player_nome.length, player_nome.length);
+                inp.focus(); // síncrono — iOS Safari exige isto
             }
         } else if (hitTest(ID_CAMPO_TURMA)) {
             inserir_active_field = "turma";
             if (showDpad) {
                 const inp = document.getElementById("hiddenInputTurma");
-                console.log("Clicou campo turma. player_turma atual:", player_turma);
-                // Técnica mais robusta: limpar, esperar render, depois sincronizar
-                inp.blur();
-                inp.value = "";
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        inp.value = player_turma;
-                        console.log("Input turma sincronizado com:", player_turma);
-                        inp.setSelectionRange(player_turma.length, player_turma.length);
-                        inp.focus();
-                    });
-                });
+                inp.value = player_turma;
+                inp.setSelectionRange(player_turma.length, player_turma.length);
+                inp.focus(); // síncrono — iOS Safari exige isto
             }
         } else if (hitTest(ID_BTN_COMECAR)) {
             if (player_nome.trim() !== "" && player_turma.trim() !== "") {
