@@ -178,5 +178,185 @@
       "###.....",
       "###...B#"
     ]
+  },
+  {
+    "id": 11,
+    "texto": "O que deves fazer ao criar uma nova conta online?",
+    "respostas": {
+      "A": "Usar uma senha única e forte",
+      "B": "Usar a data de nascimento como senha",
+      "C": "Guardar a senha num documento com o nome 'senhas.txt'"
+    },
+    "correta": "A",
+    "grid": [
+      "..#.####",
+      "....##.#",
+      "#.......",
+      "..####..",
+      ".B##...A",
+      "###..C##"
+    ]
+  },
+  {
+    "id": 12,
+    "texto": "Qual é o propósito de um antivírus?",
+    "respostas": {
+      "A": "Tornar o computador mais rápido",
+      "B": "Proteger contra software malicioso",
+      "C": "Fazer backup dos ficheiros"
+    },
+    "correta": "B",
+    "grid": [
+      "....A###",
+      ".##..#.#",
+      "..#.....",
+      "..####..",
+      "..##...B",
+      ".C##.###"
+    ]
+  },
+  {
+    "id": 13,
+    "texto": "Quando deves atualizar o teu sistema operativo?",
+    "respostas": {
+      "A": "Nunca, as atualizações são perigosas",
+      "B": "Regularmente para corrigir falhas de segurança",
+      "C": "Só quando o computador deixar de funcionar"
+    },
+    "correta": "B",
+    "grid": [
+      "..####.#",
+      ".A###...",
+      "....#...",
+      ".##.#..#",
+      "..#....#",
+      "##...B.C"
+    ]
+  },
+  {
+    "id": 14,
+    "texto": "O que é um backup de dados?",
+    "respostas": {
+      "A": "Apagar ficheiros antigos",
+      "B": "Copiar ficheiros para guardar em segurança",
+      "C": "Partilhar ficheiros com amigos"
+    },
+    "correta": "B",
+    "grid": [
+      "A...####",
+      "..#..#.#",
+      "....##..",
+      "..#.....",
+      "#.###..B",
+      "###C.#.#"
+    ]
+  },
+  {
+    "id": 15,
+    "texto": "O que deves fazer se o teu dispositivo for roubado?",
+    "respostas": {
+      "A": "Esperar que apareça",
+      "B": "Mudar todas as senhas importantes imediatamente",
+      "C": "Comprar um novo e não fazer nada"
+    },
+    "correta": "B",
+    "grid": [
+      "..A###.#",
+      "...##...",
+      "#.###...",
+      ".....#.#",
+      "..##...B",
+      ".C####.#"
+    ]
+  },
+  {
+    "id": 16,
+    "texto": "O que é ransomware?",
+    "respostas": {
+      "A": "Software que bloqueia o computador e pede dinheiro para desbloquear",
+      "B": "Um programa de proteção pago",
+      "C": "Uma forma de fazer backup automático"
+    },
+    "correta": "A",
+    "grid": [
+      "..C.##.#",
+      "..#..###",
+      "#....#.#",
+      "#.####..",
+      "......A.",
+      "####..B#"
+    ]
+  },
+  {
+    "id": 17,
+    "texto": "Qual é o risco de usar a mesma senha em vários sites?",
+    "respostas": {
+      "A": "Nenhum, é mais prático",
+      "B": "Se um site for hackeado, todas as contas ficam em risco",
+      "C": "O computador fica mais lento"
+    },
+    "correta": "B",
+    "grid": [
+      "...C####",
+      "..###..#",
+      ".##....#",
+      "......A#",
+      ".###....",
+      ".##..B.#"
+    ]
+  },
+  {
+    "id": 18,
+    "texto": "O que deves verificar antes de fazer uma compra online?",
+    "respostas": {
+      "A": "Apenas o preço",
+      "B": "Se o site tem HTTPS e boa reputação",
+      "C": "Se o site tem muitas cores"
+    },
+    "correta": "B",
+    "grid": [
+      "B.#.##.#",
+      "..#..###",
+      "....##..",
+      "#......C",
+      "#.####..",
+      "...##.A#"
+    ]
+  },
+  {
+    "id": 19,
+    "texto": "O que é engenharia social no contexto de cibersegurança?",
+    "respostas": {
+      "A": "Criar redes sociais novas",
+      "B": "Manipular pessoas para revelar informações confidenciais",
+      "C": "Programar em linguagens sociais"
+    },
+    "correta": "B",
+    "grid": [
+      "..####.C",
+      ".A##...#",
+      "...#....",
+      "..#.##..",
+      ".....#.#",
+      "###....B"
+    ]
+  },
+  {
+    "id": 20,
+    "texto": "Porque é importante fazer logout das contas em computadores públicos?",
+    "respostas": {
+      "A": "Para libertar memória do computador",
+      "B": "Para impedir que outros acedam à tua conta",
+      "C": "Não é necessário, o computador faz isso automaticamente"
+    },
+    "correta": "B",
+    "grid": [
+      "....C###",
+      "..###..#",
+      "..##....",
+      "#.......",
+      ".A####..",
+      "###..B.#"
+    ]
   }
 ]
