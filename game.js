@@ -264,7 +264,7 @@ async function loadQuestions() {
 const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzUeLCzCHrBQc1i-fUeCUxoU6761nOLflfe23HZMrfbTauqIMZmxxti2c1bK_aABLk2mA/exec";
 // ──────────────────────────────────────────────────────────────────────────────
 
-async function saveResult(nome, turma, tempo_ms) {
+async function saveResult(nome, turma, tempo_ms, vidas_restantes) {
     const secs = Math.floor(tempo_ms / 1000);
     const mins = Math.floor(secs / 60);
     const s    = secs % 60;
@@ -275,6 +275,7 @@ async function saveResult(nome, turma, tempo_ms) {
         turma: turma,
         tempo: tempoStr,
         tempo_ms: tempo_ms,
+        vidas: vidas_restantes,
         data: new Date().toLocaleString("pt-PT")
     };
 
@@ -366,7 +367,7 @@ function handleSocketInteraction(socketId) {
             final_game_time = performance.now() - game_timer_start;
             playSound("victory.wav");
             // Guardar resultado (só vitória)
-            saveResult(player_nome, player_turma, final_game_time);
+            saveResult(player_nome, player_turma, final_game_time, lives);
             state = "vitoria";
         } else { startQuestion(); }
     } else {
