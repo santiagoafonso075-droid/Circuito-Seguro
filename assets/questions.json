@@ -315,12 +315,12 @@
     },
     "correta": "B",
     "grid": [
-      "B.#.##.#",
+      "A.#.##.#",
       "..#..###",
       "....##..",
       "#......C",
       "#.####..",
-      "...##.A#"
+      "...##.B#"
     ]
   },
   {
@@ -356,6 +356,96 @@
       "..##....",
       "#.......",
       ".A####..",
+      "###..B.#"
+    ]
+  },
+  {
+    "id": 21,
+    "texto": "O que é spam?",
+    "respostas": {
+      "A": "Mensagens não solicitadas, geralmente publicidade",
+      "B": "Um tipo de vírus perigoso",
+      "C": "Uma forma de pagamento online"
+    },
+    "correta": "A",
+    "grid": [
+      "..##B###",
+      "...#...#",
+      ".#...#..",
+      "......C.",
+      "..####..",
+      "A.####.#"
+    ]
+  },
+  {
+    "id": 22,
+    "texto": "Como podes saber se um e-mail é legítimo ou falso?",
+    "respostas": {
+      "A": "Verificar o remetente e procurar erros ortográficos",
+      "B": "Se tiver imagens é sempre real",
+      "C": "Todos os e-mails são seguros"
+    },
+    "correta": "A",
+    "grid": [
+      "....####",
+      "..C###.#",
+      "##..#...",
+      ".#......",
+      "...#A...",
+      "#..##B.#"
+    ]
+  },
+  {
+    "id": 23,
+    "texto": "O que é uma VPN?",
+    "respostas": {
+      "A": "Um tipo de vírus",
+      "B": "Uma rede privada virtual que protege a navegação",
+      "C": "Um programa para acelerar a internet"
+    },
+    "correta": "B",
+    "grid": [
+      "..A.##.#",
+      "..#..###",
+      "#....#.C",
+      "#.####..",
+      "........",
+      "####..B#"
+    ]
+  },
+  {
+    "id": 24,
+    "texto": "Qual é a melhor forma de proteger o teu telemóvel?",
+    "respostas": {
+      "A": "Não usar código de bloqueio para ser mais rápido",
+      "B": "Usar código/biometria e manter apps atualizadas",
+      "C": "Instalar todas as apps disponíveis"
+    },
+    "correta": "B",
+    "grid": [
+      "...C####",
+      "..###..#",
+      ".A#....#",
+      "......#.",
+      ".###....",
+      ".##..B.#"
+    ]
+  },
+  {
+    "id": 25,
+    "texto": "O que deves fazer se clicares num link suspeito por engano?",
+    "respostas": {
+      "A": "Ignorar e não fazer nada",
+      "B": "Fechar imediatamente, mudar senhas e verificar o dispositivo",
+      "C": "Continuar a navegar normalmente"
+    },
+    "correta": "B",
+    "grid": [
+      "..####.C",
+      ".A##...#",
+      "...#....",
+      "..#.##..",
+      "........",
       "###..B.#"
     ]
   }
