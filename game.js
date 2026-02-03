@@ -301,7 +301,7 @@ async function saveResult(nome, turma, tempo_ms) {
 // ─── LÓGICA DO JOGO ──────────────────────────────────────────────────────────
 function startGameSession() {
     const indices = [];
-    while (indices.length < 5) {
+    while (indices.length < 10) {
         const r = Math.floor(Math.random() * all_questions.length);
         if (!indices.includes(r)) indices.push(r);
     }
