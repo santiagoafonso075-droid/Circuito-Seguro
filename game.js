@@ -261,7 +261,7 @@ async function loadQuestions() {
 // Para configurar: ver o ficheiro COMO_GUARDAR_DADOS.txt na pasta do projecto.
 //
 // ⬇️  COLA AQUI A URL DO GOOGLE APPS SCRIPT (ver instruções no ficheiro):
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbyp0QIBVBRofzWFTwwSSEHisV7o18UnQ7G_gRpI3jbj3NPYYRdDiLyb9GaGDsDYVyen/exec";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzV2a5IdHvXYRreuhcuMhoTuo6miX5YSDGwDptw2oOCF77FKuLne1spa4thiPO6sQU/exec";
 // ──────────────────────────────────────────────────────────────────────────────
 
 async function saveResult(nome, turma, tempo_ms) {
