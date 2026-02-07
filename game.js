@@ -236,10 +236,10 @@ async function loadQuestions() {
     try {
         const resp = await fetch("assets/questions.json");
         const data = await resp.json();
-        if (Array.isArray(data) && data.length >= 25) { all_questions = data; return; }
+        if (Array.isArray(data) && data.length >= 10) { all_questions = data; return; }
     } catch(e) {}
     all_questions = [];
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 10; i++) {
         const grid = [];
         for (let r = 0; r < GRID_ROWS; r++) grid.push(".".repeat(GRID_COLS));
         const row = Math.floor(Math.random() * GRID_ROWS);
@@ -261,10 +261,10 @@ async function loadQuestions() {
 // Para configurar: ver o ficheiro COMO_GUARDAR_DADOS.txt na pasta do projecto.
 //
 // ⬇️  COLA AQUI A URL DO GOOGLE APPS SCRIPT (ver instruções no ficheiro):
-const SHEETS_URL = "https://script.google.com/macros/s/AKfycbwThYBSBCsMazIzUsdZB6n9DSkD77sPTy9K5dSzzq-i1I2JjudCJWjfxZQDZwfiQIKupw/exec";
+const SHEETS_URL = "https://script.google.com/macros/s/AKfycbzUeLCzCHrBQc1i-fUeCUxoU6761nOLflfe23HZMrfbTauqIMZmxxti2c1bK_aABLk2mA/exec";
 // ──────────────────────────────────────────────────────────────────────────────
 
-async function saveResult(nome, turma, tempo_ms, vidas_restantes) {
+async function saveResult(nome, turma, tempo_ms) {
     const secs = Math.floor(tempo_ms / 1000);
     const mins = Math.floor(secs / 60);
     const s    = secs % 60;
@@ -275,7 +275,6 @@ async function saveResult(nome, turma, tempo_ms, vidas_restantes) {
         turma: turma,
         tempo: tempoStr,
         tempo_ms: tempo_ms,
-        vidas: vidas_restantes,
         data: new Date().toLocaleString("pt-PT")
     };
 
@@ -302,7 +301,7 @@ async function saveResult(nome, turma, tempo_ms, vidas_restantes) {
 // ─── LÓGICA DO JOGO ──────────────────────────────────────────────────────────
 function startGameSession() {
     const indices = [];
-    while (indices.length < 15) {
+    while (indices.length < 10) {
         const r = Math.floor(Math.random() * all_questions.length);
         if (!indices.includes(r)) indices.push(r);
     }
@@ -367,7 +366,7 @@ function handleSocketInteraction(socketId) {
             final_game_time = performance.now() - game_timer_start;
             playSound("victory.wav");
             // Guardar resultado (só vitória)
-            saveResult(player_nome, player_turma, final_game_time, lives);
+            saveResult(player_nome, player_turma, final_game_time);
             state = "vitoria";
         } else { startQuestion(); }
     } else {
