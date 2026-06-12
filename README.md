@@ -1,5 +1,5 @@
 <h1>
-  <img alt="Circuito Seguro Logo" src="./assets/logotipo.png" width="100" valign="middle">
+  <img alt="Circuito Seguro Logo" src="./assets/logotipo.png" width="100" heigth="50" valign="middle">
   &nbsp;Circuito Seguro
 </h1>
 
