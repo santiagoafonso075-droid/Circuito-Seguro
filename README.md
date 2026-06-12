@@ -1,6 +1,6 @@
 <h1>
-  <img alt="Circuito Seguro Logo" src="./assets/logotipo.png" width="70" valign="middle">
-  &nbsp;container
+  <img alt="Circuito Seguro Logo" src="./assets/logotipo.png" width="90" valign="middle">
+  &nbsp;Circuito Seguro
 </h1>
 
 ## Descrição do Projeto | Description of the Project
