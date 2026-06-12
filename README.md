@@ -4,7 +4,7 @@ Para jogar, basta aceder ao link disponível na página inicial deste repositór
 
 Espero que gostem da experiência e que o resultado esteja à altura das expectativas.
 
-===========================================================================================================================================================================================================================================================
+=====================================================================================================================================================================================
 
 This game was developed as a school project as part of Safer Internet Day. The entire project was created by me, with the assistance of Artificial Intelligence tools only for some of the more complex parts of the development process.
 
