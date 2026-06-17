@@ -30,6 +30,6 @@ https://santiagoafonso075-droid.github.io/Circuito-Seguro/
 ---
 
 ## Tecnologias
-<img src="https://skillicons.dev/icons?i=html,css,js" />
+<img src="https://skillicons.dev/icons?i=html,css,js,sublime" />
 
 ---
