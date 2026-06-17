@@ -1,22 +1,35 @@
-<h1>
-  <img alt="Circuito Seguro Logo" src="./assets/logotipo.png" width="100" heigth="50" valign="middle">
-  &nbsp;Circuito Seguro
+# Circuito Seguro
+Webgame sobre a práticas saudáveis na internet.
+
+<h1 align="center">
+  <img alt="Project Logo" src="./assets/logotipo.png" width="90" height="90" valign="middle">
+  &nbsp;
 </h1>
 
-## Descrição do Projeto | Description of the Project
+---
 
-### PT-PT
-Este jogo foi desenvolvido como projeto escolar no âmbito do Dia da Internet Segura. Todo o desenvolvimento foi realizado por mim, recorrendo ao apoio de ferramentas de Inteligência Artificial apenas em algumas partes mais complexas do processo.
+## Descrição do Projeto
+Circuito Seguro é um jogo educativo focado na segurança na Internet, criado para ajudar os utilizadores a reconhecer ameaças digitais e a adotar boas práticas de proteção online. Através de desafios interativos e cenários do quotidiano digital, o jogador aprende a identificar riscos como phishing, palavras-passe fracas, partilha excessiva de informação pessoal e outras ameaças comuns.
 
-Espero que gostem da experiência e que o resultado esteja à altura das expectativas.
+O principal objetivo do projeto é promover a literacia digital e a consciencialização para a cibersegurança de forma dinâmica e envolvente, permitindo que os utilizadores desenvolvam competências essenciais para navegar na Internet de forma mais segura.
 
-### ENG
-This game was developed as a school project as part of Safer Internet Day. The entire project was created by me, with the assistance of Artificial Intelligence tools only for some of the more complex parts of the development process.
+---
 
-I hope you enjoy the experience and that the final result meets your expectations.
+## Funcionalidades
+- Identificação e prevenção de ameaças digitais, como phishing, malware e tentativas de fraude online.
+- Desafios interativos que ensinam boas práticas de segurança, incluindo a criação de palavras-passe seguras e a proteção de dados pessoais.
+- Sistema de pontuação e feedback que avalia as decisões do jogador e reforça os conceitos de cibersegurança aprendidos.  
 
+---
 
-## Como Jogar | How to Play
+## Como Jogar
 
-Link - 'https://santiagoafonso075-droid.github.io/Circuito-Seguro/'
+Link do projeto:  
+https://santiagoafonso075-droid.github.io/Circuito-Seguro/
 
+---
+
+## Tecnologias
+<img src="https://skillicons.dev/icons?i=html,css,js" />
+
+---
